@@ -1,0 +1,25 @@
+@startuml Entities
+
+package entities <<Folder>> {
+
+    class District {
+        - String name;
+        - Double price;
+    }
+
+    class House {
+        - String propName;
+        - String districtName;
+        - double districtPrice;
+        - List<RoomDTO> rooms;
+    }
+
+    class Room {
+        - String name;
+        - double width;
+        - double length;
+    }
+
+}
+
+@enduml

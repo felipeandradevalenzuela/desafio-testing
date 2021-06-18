@@ -1,0 +1,24 @@
+@startuml Services
+
+package Service <<Folder>> {
+
+    interface ICalculateService {
+        + calculateTotalSquareFeet(HouseDTO house)
+        + calculatePrice(HouseDTO house) throws NoSuchFieldException
+        + getBiggestRoom(HouseDTO house)
+        + calculateSquareFeetPerRoom(HouseDTO house)
+    }
+
+    class CalculateServiceImpl implements ICalculateService {
+        + calculateTotalSquareFeet(HouseDTO house)
+        + calculatePrice(HouseDTO house) throws NoSuchFieldException
+        + getBiggestRoom(HouseDTO house)
+        + calculateSquareFeetPerRoom(HouseDTO house)
+        - getSquareFeet(RoomDTO room)
+        - calculateRoomSquareFeet(HouseDTO house)
+        - calculateBiggestRoom(HouseDTO house)
+        - priceByDistrict(String districtName) throws NoSuchFieldException
+    }
+}
+
+@enduml

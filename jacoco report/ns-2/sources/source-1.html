@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ExceptionControllerAdvice</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.CalculadoraMetrosCuadrados.controller.advice</a>
+</div>
+
+<h1>Coverage Summary for Class: ExceptionControllerAdvice (com.example.CalculadoraMetrosCuadrados.controller.advice)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ExceptionControllerAdvice</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package com.example.CalculadoraMetrosCuadrados.controller.advice;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import com.example.CalculadoraMetrosCuadrados.dto.error.ErrorDTO;
+<i class="no-highlight">4</i>&nbsp;import org.springframework.http.HttpStatus;
+<i class="no-highlight">5</i>&nbsp;import org.springframework.http.ResponseEntity;
+<i class="no-highlight">6</i>&nbsp;import org.springframework.http.converter.HttpMessageNotReadableException;
+<i class="no-highlight">7</i>&nbsp;import org.springframework.validation.ObjectError;
+<i class="no-highlight">8</i>&nbsp;import org.springframework.web.bind.MethodArgumentNotValidException;
+<i class="no-highlight">9</i>&nbsp;import org.springframework.web.bind.annotation.ExceptionHandler;
+<i class="no-highlight">10</i>&nbsp;import org.springframework.web.bind.annotation.ResponseStatus;
+<i class="no-highlight">11</i>&nbsp;import org.springframework.web.bind.annotation.RestControllerAdvice;
+<i class="no-highlight">12</i>&nbsp;
+<i class="no-highlight">13</i>&nbsp;import java.time.LocalDateTime;
+<i class="no-highlight">14</i>&nbsp;import java.util.ArrayList;
+<i class="no-highlight">15</i>&nbsp;import java.util.List;
+<i class="no-highlight">16</i>&nbsp;
+<i class="no-highlight">17</i>&nbsp;@RestControllerAdvice
+<b class="fc"><i class="no-highlight">18</i>&nbsp;public class ExceptionControllerAdvice {</b>
+<i class="no-highlight">19</i>&nbsp;
+<i class="no-highlight">20</i>&nbsp;    @ResponseStatus(HttpStatus.BAD_REQUEST)
+<i class="no-highlight">21</i>&nbsp;    @ExceptionHandler({NoSuchFieldException.class})
+<i class="no-highlight">22</i>&nbsp;    public ErrorDTO handleDistrictNotFoundException(NoSuchFieldException e) {
+<b class="fc"><i class="no-highlight">23</i>&nbsp;        return new ErrorDTO(&quot;Error en la busqueda del barrio&quot;, e.getMessage(), LocalDateTime.now());</b>
+<i class="no-highlight">24</i>&nbsp;    }
+<i class="no-highlight">25</i>&nbsp;
+<i class="no-highlight">26</i>&nbsp;    @ExceptionHandler(MethodArgumentNotValidException.class)
+<i class="no-highlight">27</i>&nbsp;    public ResponseEntity MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+<b class="fc"><i class="no-highlight">28</i>&nbsp;        List&lt;String&gt; ListErrors = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i class="no-highlight">29</i>&nbsp;        for (ObjectError error1 : e.getAllErrors()) {</b>
+<b class="fc"><i class="no-highlight">30</i>&nbsp;            ListErrors.add(error1.getDefaultMessage());</b>
+<b class="fc"><i class="no-highlight">31</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">32</i>&nbsp;        return new ResponseEntity&lt;&gt;(new ErrorDTO(&quot;Informacion no valida&quot;, String.join(&quot;, &quot;, ListErrors), LocalDateTime.now()), HttpStatus.NOT_ACCEPTABLE);</b>
+<i class="no-highlight">33</i>&nbsp;    }
+<i class="no-highlight">34</i>&nbsp;
+<i class="no-highlight">35</i>&nbsp;    @ExceptionHandler(HttpMessageNotReadableException.class)
+<i class="no-highlight">36</i>&nbsp;    public ResponseEntity HttpMessageNotReadableExceptionHandler(HttpMessageNotReadableException e) {
+<b class="fc"><i class="no-highlight">37</i>&nbsp;        ErrorDTO error = new ErrorDTO(&quot;Informacion del Request no valida&quot;, e.getMessage(), LocalDateTime.now());</b>
+<b class="fc"><i class="no-highlight">38</i>&nbsp;        return new ResponseEntity&lt;&gt;(error, HttpStatus.INTERNAL_SERVER_ERROR);</b>
+<i class="no-highlight">39</i>&nbsp;    }
+<i class="no-highlight">40</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-06-18 11:26</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+@startuml Controllers
+
+package controller <<Folder>> {
+
+    package advice <<Folder>> {
+        class ExceptionControllerAdvice {
+            + handleDistrictNotFoundException(NoSuchFieldException e)
+            + MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e)
+            + HttpMessageNotReadableExceptionHandler(HttpMessageNotReadableException e)
+        }
+    }
+
+    class CalculateRestController {
+        - ICalculateService calculateService
+        + calculateTotalSquareFeet(HouseDTO house)
+        + calculatePrice(HouseDTO house) throws NoSuchFieldException
+        + getBiggestRoom(HouseDTO house)
+        + calculateSquareFeetPerRoom(HouseDTO house)
+    }
+
+}
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml Repository
+
+package repository <<Folder>> {
+
+    interface IDistrictRepository {
+        + getDistrictByName(String name) throws NoSuchFieldException
+    }
+
+    class DistrictRepository implements IDistrictRepository {
+        - List<District> districts
+        - String classPath
+        + getDistrictByName(String name) throws NoSuchFieldException
+        - loadFromDB() throws IOException
+    }
+
+}
+
+@enduml

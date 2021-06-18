@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,9 @@ class DistrictRepositoryTest {
     private static String districtNameIncorrect;
     private static List<District> districts = new ArrayList<>();
     District expected = new District("Maipú", 2000.0);
+
+    DistrictRepositoryTest() throws IOException {
+    }
 
     @BeforeAll
     static void beforeAll() {

@@ -1,0 +1,124 @@
+@startuml Diagramas
+
+package controller <<Folder>> {
+
+    package advice <<Folder>> {
+        class ExceptionControllerAdvice {
+            + handleDistrictNotFoundException(NoSuchFieldException e)
+            + MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e)
+            + HttpMessageNotReadableExceptionHandler(HttpMessageNotReadableException e)
+        }
+    }
+
+    class CalculateRestController {
+        - ICalculateService calculateService
+        + calculateTotalSquareFeet(HouseDTO house)
+        + calculatePrice(HouseDTO house) throws NoSuchFieldException
+        + getBiggestRoom(HouseDTO house)
+        + calculateSquareFeetPerRoom(HouseDTO house)
+    }
+
+}
+
+package dto <<Folder>> {
+
+    package error <<Folder>> {
+        class ErrorDTO {
+            - String name;
+            - String message;
+            - LocalDateTime timestamp;
+        }
+    }
+
+    package response <<Folder>> {
+        class HouseResponseSquareFeetPerRoomDTO {
+            - List<RoomSquareFeetDTO> roomsSquareFeet;
+        }
+
+        class HouseResponseTotalSquareFeetDTO {
+            - double squareFeet;
+        }
+
+        class HouseResponseValueDTO {
+            - Double value;
+        }
+    }
+
+    class HouseDTO {
+        - String propName
+        - String districtName
+        - double districtPrice
+        - List<RoomDTO> rooms
+    }
+
+    class RoomDTO {
+        - String name
+        - double width
+        - double length
+    }
+
+    class RoomSquareFeetDTO {
+
+    }
+
+}
+
+package entities <<Folder>> {
+
+    class District {
+        - String name;
+        - Double price;
+    }
+
+    class House {
+        - String propName;
+        - String districtName;
+        - double districtPrice;
+        - List<RoomDTO> rooms;
+    }
+
+    class Room {
+        - String name;
+        - double width;
+        - double length;
+    }
+
+}
+
+package repository <<Folder>> {
+
+    interface IDistrictRepository {
+        + getDistrictByName(String name) throws NoSuchFieldException
+    }
+
+    class DistrictRepository implements IDistrictRepository {
+        - List<District> districts
+        - String classPath
+        + getDistrictByName(String name) throws NoSuchFieldException
+        - loadFromDB() throws IOException
+    }
+
+}
+
+package Service <<Folder>> {
+
+    interface ICalculateService {
+        + calculateTotalSquareFeet(HouseDTO house)
+        + calculatePrice(HouseDTO house) throws NoSuchFieldException
+        + getBiggestRoom(HouseDTO house)
+        + calculateSquareFeetPerRoom(HouseDTO house)
+    }
+
+    class CalculateServiceImpl implements ICalculateService {
+        + calculateTotalSquareFeet(HouseDTO house)
+        + calculatePrice(HouseDTO house) throws NoSuchFieldException
+        + getBiggestRoom(HouseDTO house)
+        + calculateSquareFeetPerRoom(HouseDTO house)
+        - getSquareFeet(RoomDTO room)
+        - calculateRoomSquareFeet(HouseDTO house)
+        - calculateBiggestRoom(HouseDTO house)
+        - priceByDistrict(String districtName) throws NoSuchFieldException
+    }
+}
+
+@enduml

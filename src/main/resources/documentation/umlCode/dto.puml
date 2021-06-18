@@ -1,0 +1,46 @@
+@startuml DTO'S
+
+package dto <<Folder>> {
+
+    package error <<Folder>> {
+        class ErrorDTO {
+            - String name;
+            - String message;
+            - LocalDateTime timestamp;
+        }
+    }
+
+    package response <<Folder>> {
+        class HouseResponseSquareFeetPerRoomDTO {
+            - List<RoomSquareFeetDTO> roomsSquareFeet;
+        }
+
+        class HouseResponseTotalSquareFeetDTO {
+            - double squareFeet;
+        }
+
+        class HouseResponseValueDTO {
+            - Double value;
+        }
+    }
+
+    class HouseDTO {
+        - String propName
+        - String districtName
+        - double districtPrice
+        - List<RoomDTO> rooms
+    }
+
+    class RoomDTO {
+        - String name
+        - double width
+        - double length
+    }
+
+    class RoomSquareFeetDTO {
+
+    }
+
+}
+
+@enduml

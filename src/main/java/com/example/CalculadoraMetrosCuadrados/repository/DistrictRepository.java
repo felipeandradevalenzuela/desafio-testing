@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,39 +17,33 @@ public class DistrictRepository implements IDistrictRepository {
     private List<District> districts;
     private String classPath = "classpath:districts.json";
 
-    public DistrictRepository() {
+    public DistrictRepository() throws IOException {
         this.districts = loadFromDB();
     }
 
     /**
      * Metodo para cargar el archivo Json como base
+     *
      * @return
      */
-    private List<District> loadFromDB() {
+    private List<District> loadFromDB() throws IOException {
         List<District> ret = null;
 
         File file = null;
-
-        try {
-            file = ResourceUtils.getFile(classPath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        file = ResourceUtils.getFile(classPath);
 
         var objectMapper = new ObjectMapper();
 
-        try {
-            ret = objectMapper.readValue(file, new TypeReference<List<District>>() {
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ret = objectMapper.readValue(file, new TypeReference<List<District>>() {
+        });
+
 
         return ret;
     }
 
     /**
      * Metodo para obtener un barrio a partir de su nombre
+     *
      * @param name
      * @return
      * @throws NoSuchFieldException
